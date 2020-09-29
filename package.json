@@ -1,0 +1,29 @@
+{
+  "name": "@jambonz/messaging-peerless",
+  "version": "0.0.1",
+  "description": "body parsing function for incoming SMS from Peerless",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test node test/ | ./node_modules/.bin/tap-spec",
+    "coverage": "./node_modules/.bin/nyc --reporter html --report-dir ./coverage npm run test",
+    "jslint": "eslint index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jambonz/messaging-peerless.git"
+  },
+  "author": "Dave Horton",
+  "bugs": {
+    "url": "https://github.com/jambonz/messaging-peerless/issues"
+  },
+  "homepage": "https://github.com/jambonz/messaging-peerless#readme",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.10.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "nyc": "^15.1.0",
+    "tap-dot": "^2.0.0",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.0.1"
+  }
+}

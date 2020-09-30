@@ -7,7 +7,7 @@ const noopLogger = {
 
 const toBase64 = (str) => Buffer.from(str || '', 'utf8').toString('base64');
 
-const fromProviderFormat = (opts, url, payload) => {
+const fromProviderFormat = (opts, payload) => {
   const obj = Object.assign({}, opts, {
     from: payload.from,
     to: payload.recipients || [],

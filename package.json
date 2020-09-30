@@ -1,6 +1,6 @@
 {
   "name": "@jambonz/messaging-peerless",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "body parsing function for incoming SMS from Peerless",
   "main": "index.js",
   "scripts": {
@@ -25,5 +25,8 @@
     "tap-dot": "^2.0.0",
     "tap-spec": "^5.0.0",
     "tape": "^5.0.1"
+  },
+  "dependencies": {
+    "bent": "^7.3.10"
   }
 }

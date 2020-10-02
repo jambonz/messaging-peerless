@@ -30,13 +30,18 @@ const basicAuth = (username, password) => {
   return {Authorization: header};
 };
 
-const sendSms = async(opts, payload) => {
+const sendSms = async(opts, body) => {
   const logger = opts.logger || noopLogger;
   const headers = opts.auth ? basicAuth(opts.auth.username, opts.auth.password) : {};
   assert.ok(typeof opts.url === 'string', 'sendSms: opts.url must be provided');
   const post = bent('POST', 'json', 200, headers);
   try {
-    const buf = await post(opts.url, payload);
+    const buf = await post(opts.url, {
+      from: body.from,
+      recipients: [body.to],
+      text: body.text,
+      media: body.media
+    });
     return buf;
   } catch (err) {
     logger.error({err, url: opts.url}, 'Error sending SMS to peerless');

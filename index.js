@@ -5,13 +5,17 @@ const noopLogger = {
   error: console.error
 };
 
+const stripLeadingPlus = (str) => (str.startsWith('+') ? str.slice(1) : str);
+
+const addLeadingPlus = (str) => (str.startsWith('+') ? str : `+${str}`);
+
 const toBase64 = (str) => Buffer.from(str || '', 'utf8').toString('base64');
 
 const fromProviderFormat = (opts, payload) => {
   const obj = Object.assign({}, opts, {
-    from: payload.from,
-    to: payload.recipients || [],
-    cc: payload.ccRecipients || [],
+    from: stripLeadingPlus(payload.from),
+    to: (payload.recipients || []).map((str) => stripLeadingPlus(str)),
+    cc: (payload.ccRecipients || []).map((str) => stripLeadingPlus(str)),
     text: payload.text,
     media: []
   });
@@ -21,7 +25,7 @@ const fromProviderFormat = (opts, payload) => {
 
 const formatProviderResponse = (messageSid) => {
   return {receipt: messageSid, status: 'accepted'};
-}
+};
 
 const basicAuth = (username, password) => {
   if (!username || !password) return {};
@@ -37,7 +41,7 @@ const sendSms = async(opts, body) => {
   const post = bent('POST', 'json', 200, headers);
   try {
     const buf = await post(opts.url, {
-      from: body.from,
+      from: addLeadingPlus(body.from),
       recipients: [body.to],
       text: body.text,
       media: body.media

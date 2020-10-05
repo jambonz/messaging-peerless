@@ -17,7 +17,7 @@ test('parse incoming sms', async(t) => {
       applicationSid: 'bar',
       accountSid: 'baz'
     }, payload);
-    t.ok(obj.from === payload.from, 'successfully filtered SMS payload');
+    t.ok(payload.from === `+${obj.from}`, 'successfully filtered SMS payload');
     
     let sid = '03516fcb-3a92-4d4e-9273-1a2dab3c8295';
     obj = await formatProviderResponse(sid);

@@ -41,7 +41,8 @@ const sendSms = async(opts, body) => {
   const post = bent('POST', 'json', 200, headers);
   const payload = {
     from: addLeadingPlus(body.from),
-    recipients: [body.to]
+    recipients: [body.to],
+    ccRecipients: []
   };
   if (body.text) payload.text = body.text;
   if (body.media) payload.mediaURL = [body.media];

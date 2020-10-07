@@ -1,6 +1,6 @@
 {
   "name": "@jambonz/messaging-peerless",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "body parsing function for incoming SMS from Peerless",
   "main": "index.js",
   "scripts": {

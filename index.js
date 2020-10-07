@@ -39,16 +39,17 @@ const sendSms = async(opts, body) => {
   const headers = opts.auth ? basicAuth(opts.auth.username, opts.auth.password) : {};
   assert.ok(typeof opts.url === 'string', 'sendSms: opts.url must be provided');
   const post = bent('POST', 'json', 200, headers);
+  const payload = {
+    from: addLeadingPlus(body.from),
+    recipients: [body.to],
+    text: body.text,
+    media: body.media
+  };
   try {
-    const buf = await post(opts.url, {
-      from: addLeadingPlus(body.from),
-      recipients: [body.to],
-      text: body.text,
-      media: body.media
-    });
+    const buf = await post(opts.url, payload);
     return buf;
   } catch (err) {
-    logger.error({err, url: opts.url}, 'Error sending SMS to peerless');
+    logger.error({err, url: opts.url, payload}, 'Error sending SMS to peerless');
   }
 };
 
